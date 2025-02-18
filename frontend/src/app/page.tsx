@@ -1,14 +1,11 @@
 import React from 'react'
-import { Button } from "@/components/ui/button"
+import HeroSection from '@/components/base/HeroSection'
 
 
 const page = () => {
   return (
     <div>
-<h1  className='text-red-500 '>Home</h1>
-<Button>
-       Login with Email
-    </Button>
+      <HeroSection />
 
     </div>
   )
