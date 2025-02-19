@@ -9,16 +9,16 @@ export default function HeroSection() {
       <div>
         <Image
           src="/hfoodvsffood.svg"
-          width={600}
-          height={600}
+          width={500}
+          height={500}
           alt="healthy food vs fast food"
         />
           </div>
           <div className=" text-center  mt-4">
-      <h1 className="text-xl md:text-7xl lg:text-9xl font-extrabold bg-gradient-to-r from-green-400 to-yellow-500 text-transparent bg-clip-text">
+      <h1 className="text-xl md:text-6xl lg:text-8xl font-extrabold bg-gradient-to-r from-green-400 to-yellow-500 text-transparent bg-clip-text">
         Clash
           </h1>
-              <p className="text-sm md:text-xl  lg:text-2xl font-bold text-center">Discover the better choice, together</p>
+              <p className="text-sm md:text-xl  lg:text-xl font-bold text-center">Discover the better choice, together</p>
               <Link href="/login">
               <Button className="mt-2">Start Free</Button>
               </Link>
