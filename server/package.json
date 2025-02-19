@@ -4,16 +4,15 @@
   "description": "",
   "main": "index.js",
   "type": "module",
-"scripts": {
-  "clean": "rm -rf ./dist",
-  "start": "node ./dist/index.js",
-  "server": "nodemon ./dist/index.js",
-  "watch": "tsc -w",
-  "build": "pnpm run clean && tsc && pnpm run copy-files",
-  "dev": "concurrently \"pnpm run watch\" \"pnpm run server\" \"pnpm run watch-views\"",
-  "copy-files": "copyfiles -u 1 \"src/views/**/*\" ./dist",
-  "watch-views": "nodemon --watch src/views -e ejs -x \"pnpm run copy-files\""
-},
+  "scripts": {
+    "start": "node ./dist/index.js",
+    "server": "nodemon ./dist/index.js",
+    "watch": "tsc -w",
+    "build": "tsc && copyfiles -u 1 src/views/**/* dist",
+    "dev": "concurrently \"pnpm run watch\" \"pnpm run server\" \"pnpm run watch-views\"",
+    "copy-files": "copyfiles -u 1 \"src/views/**/*\" dist/",
+    "watch-views": "nodemon --watch src/views -e ejs -x \"pnpm run copy-files\""
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -22,15 +21,19 @@
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",
     "ejs": "^3.1.10",
-    "express": "^4.21.2"
+    "express": "^4.21.2",
+    "nodemailer": "^6.10.0"
   },
   "devDependencies": {
     "@types/cors": "^2.8.17",
+    "@types/ejs": "^3.1.5",
     "@types/express": "4.17.21",
+    "@types/nodemailer": "^6.4.17",
     "concurrently": "^9.1.2",
     "copyfiles": "^2.4.1",
     "nodemon": "^3.1.9",
     "prisma": "^6.3.1",
+    "ts-node": "^10.9.2",
     "typescript": "^5.7.3"
   }
 }

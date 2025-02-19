@@ -1,8 +1,19 @@
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 var _a;
 import express from "express";
 import "dotenv/config";
 import path from "path";
 import { fileURLToPath } from "url";
+import ejs from "ejs";
+import { sendMail } from "./config/mail.js";
 const app = express();
 const port = (_a = process.env.PORT) !== null && _a !== void 0 ? _a : 8000;
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -10,8 +21,13 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.set("view engine", "ejs");
 app.set("views", path.resolve(__dirname, "./views"));
-app.get("/", (req, res) => {
-    return res.render("welcome");
-});
+app.get("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const html = yield ejs.renderFile(__dirname + `/views/emails/welcome.ejs`, {
+        name: "Akshaya Parida",
+        message: "We are thrilled to have you with us. Enjoy the clash!"
+    });
+    yield sendMail("akparida28@gmail.com", "Welcome to Clash", html);
+    return res.json({ msg: "Email sent" });
+}));
 app.listen(port, () => console.log(`Server is running on port ${port}`));
 //# sourceMappingURL=index.js.map
