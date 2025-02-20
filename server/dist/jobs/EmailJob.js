@@ -9,9 +9,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 import { Worker } from "bullmq";
 import { redisConnection, emailQueueName } from "../config/queue.js";
+import { sendMail } from "../config/mail.js";
 export const queueWorker = new Worker(emailQueueName, (job) => __awaiter(void 0, void 0, void 0, function* () {
     const data = job.data;
-    console.log("The queue worker data is", data);
+    yield sendMail(data.to, data.subject, data.body);
 }), {
     connection: redisConnection,
 });

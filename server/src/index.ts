@@ -3,7 +3,6 @@ import "dotenv/config";
 import path from "path";
 import { fileURLToPath } from "url";
 import ejs from "ejs";
-import { sendMail } from "./config/mail.js";
 import { emailQueue, emailQueueName } from "./config/queue.js"; // Ensure this import is correct
 
 const app: Application = express();
@@ -21,9 +20,8 @@ app.get("/", async (req: Request, res: Response) => {
     name: "Akshaya Parida",
     message: "We are thrilled to have you with us. Enjoy the clash!"
   });
-  await sendMail("akparida28@gmail.com", "Welcome to Clash", html);
 
-  await emailQueue.add(emailQueueName, { name: "Akshaya Parida", age: 25 });
+  await emailQueue.add(emailQueueName, { to: "akparida28@gmail.com" , subject: "Welcome to Clash", html: html });
   return res.json({ msg: "Email sent" });
 });
 
