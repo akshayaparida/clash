@@ -7,16 +7,11 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import { Queue, Worker } from "bullmq";
-import { redisConnection, defaultQueueOptions } from "../config/queue";
-export const emailQueueName = "emailQueue";
-export const emailQueue = new Queue(emailQueueName, {
-    connection: redisConnection,
-    defaultJobOptions: defaultQueueOptions
-});
+import { Worker } from "bullmq";
+import { redisConnection, emailQueueName } from "../config/queue.js";
 export const queueWorker = new Worker(emailQueueName, (job) => __awaiter(void 0, void 0, void 0, function* () {
     const data = job.data;
-    console.log("the queue worker data is", data);
+    console.log("The queue worker data is", data);
 }), {
     connection: redisConnection,
 });

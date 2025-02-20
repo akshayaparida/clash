@@ -1,2 +1,2 @@
-import "./EmailJob.js";
+import "./EmailJob.ts";
 //# sourceMappingURL=index.js.map

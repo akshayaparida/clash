@@ -14,6 +14,7 @@ import path from "path";
 import { fileURLToPath } from "url";
 import ejs from "ejs";
 import { sendMail } from "./config/mail.js";
+import { emailQueue, emailQueueName } from "./config/queue.js"; // Ensure this import is correct
 const app = express();
 const port = (_a = process.env.PORT) !== null && _a !== void 0 ? _a : 8000;
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -27,7 +28,9 @@ app.get("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         message: "We are thrilled to have you with us. Enjoy the clash!"
     });
     yield sendMail("akparida28@gmail.com", "Welcome to Clash", html);
+    yield emailQueue.add(emailQueueName, { name: "Akshaya Parida", age: 25 });
     return res.json({ msg: "Email sent" });
 }));
+import "./jobs/EmailJob.js";
 app.listen(port, () => console.log(`Server is running on port ${port}`));
 //# sourceMappingURL=index.js.map
