@@ -8,19 +8,24 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 var _a;
+import 'module-alias/register.js';
 import express from "express";
 import "dotenv/config";
 import path from "path";
 import { fileURLToPath } from "url";
 import ejs from "ejs";
-import { emailQueue, emailQueueName } from "./config/queue.js"; // Ensure this import is correct
+import { emailQueue, emailQueueName } from "./config/queue.js";
+import Routes from "./routes/index.js";
 const app = express();
 const port = (_a = process.env.PORT) !== null && _a !== void 0 ? _a : 8000;
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+//view engine setup
 app.set("view engine", "ejs");
 app.set("views", path.resolve(__dirname, "./views"));
+// Routes
+app.use(Routes);
 app.get("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const html = yield ejs.renderFile(__dirname + `/views/emails/welcome.ejs`, {
         name: "Akshaya Parida",
